@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NotificationTrigger</string>
+    <string name="main_text">I want to trigger a notification in:</string>
+    <string name="minutes_text">min</string>
+    <string name="minutes_hint">minutes..</string>
+    <string name="trigger_text">Go</string>
+    <string name="notification_title">Notification Triggered!</string>
+    <string name="notification_text">Your notification was triggered successfully.</string>
+    <string name="notification_action_dismiss">dismiss</string>
+    <string name="remaining_time">Remaining time: </string>
+</resources>
