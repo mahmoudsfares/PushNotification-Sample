@@ -13,7 +13,6 @@ import com.example.notificationtrigger.sync.TriggerIntentService;
 import com.example.notificationtrigger.sync.TriggerTasks;
 
 public class NotificationUtils {
-
     private static final String NOTIFICATION_CHANNEL_ID = "notif-channel";
     private static final String NOTIFICATION_CHANNEL_NAME = "Primary";
     private static final int PENDING_INTENT_ID = 1991;
@@ -42,6 +41,7 @@ public class NotificationUtils {
         builder.setAutoCancel(true)
                 .setContentText(context.getString(R.string.notification_text))
                 .setContentTitle(context.getString(R.string.notification_title))
+                // this attribute controls what happens when a notification is clicked
                 .setContentIntent(contentIntent(context))
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .addAction(dismissNotification(context));
@@ -53,6 +53,9 @@ public class NotificationUtils {
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
+    /*
+    guarantees that a click on the notification will start MainActivity
+     */
     private static PendingIntent contentIntent(Context context){
         Intent toMainActivity = new Intent(context, MainActivity.class);
         return PendingIntent.getActivity(
@@ -63,8 +66,6 @@ public class NotificationUtils {
     }
 
     private static NotificationCompat.Action dismissNotification (Context context){
-        // accessed
-        // TriggerIntentService constructor is not triggered
         Intent intent = new Intent(context, TriggerIntentService.class);
         intent.setAction(TriggerTasks.DISMISS_NOTIFICATION);
         PendingIntent pendingIntent = PendingIntent.getService(

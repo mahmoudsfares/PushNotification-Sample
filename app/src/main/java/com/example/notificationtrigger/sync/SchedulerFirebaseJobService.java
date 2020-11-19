@@ -14,6 +14,7 @@ public class SchedulerFirebaseJobService extends JobService {
         mTask = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
+                // work to be done in background
                 Context context = SchedulerFirebaseJobService.this;
                 TriggerTasks.executeTask(context, TriggerTasks.TRIGGER_NOTIFICATION);
                 return null;
@@ -25,7 +26,6 @@ public class SchedulerFirebaseJobService extends JobService {
                 jobFinished(job, false);
             }
         };
-
         mTask.execute();
         return true;
     }

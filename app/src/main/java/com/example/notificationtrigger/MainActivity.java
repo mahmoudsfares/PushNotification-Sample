@@ -1,6 +1,12 @@
 package com.example.notificationtrigger;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -9,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.notificationtrigger.sync.MyWorker;
 import com.example.notificationtrigger.utils.JobSchedulerUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,9 +53,27 @@ public class MainActivity extends AppCompatActivity {
                                 ((minutes != 1) ? " minutes" : " minute"),
                         Toast.LENGTH_SHORT)
                         .show();
-                JobSchedulerUtils.scheduleNotification(MainActivity.this, minutes);
-                mRemainingMillis = minutes*1000*60;
-                startTimer(mRemainingMillis);
+                // in case of wanting the notification to be triggered at an exact time, uncomment this
+                // JobSchedulerUtils.scheduleNotification(MainActivity.this, minutes);
+
+
+                // in case of allowing some delay, uncomment the following
+//                // set data as extras when using Worker
+//                Data data = new Data.Builder()
+//                        .putInt("number", minutes*60)
+//                        .build();
+//
+//                OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(MyWorker.class)
+//                        // add data bundle
+//                        .setInputData(data)
+//                        // add tag
+//                        .addTag("timer")
+//                        .build();
+//                // use WorkManager by passing the WorkRequest
+//                WorkManager.getInstance(MainActivity.this).enqueue(oneTimeWorkRequest);
+//
+//                mRemainingMillis = minutes*1000*60;
+//                startTimer(mRemainingMillis);
             }
         });
     }

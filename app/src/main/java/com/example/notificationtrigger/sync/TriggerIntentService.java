@@ -4,6 +4,9 @@ import android.app.IntentService;
 import android.content.Intent;
 import androidx.annotation.Nullable;
 
+/*
+run work inside onHandleIntent in a separate background thread
+ */
 public class TriggerIntentService extends IntentService {
 
     public TriggerIntentService() {
