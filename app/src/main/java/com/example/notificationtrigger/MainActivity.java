@@ -53,11 +53,14 @@ public class MainActivity extends AppCompatActivity {
                                 ((minutes != 1) ? " minutes" : " minute"),
                         Toast.LENGTH_SHORT)
                         .show();
-                // in case of wanting the notification to be triggered at an exact time, uncomment this
-                // JobSchedulerUtils.scheduleNotification(MainActivity.this, minutes);
+
+                // in case of wanting the notification to be triggered at an exact time (DEPRECATED) , uncomment this
+
+//                 JobSchedulerUtils.scheduleNotification(MainActivity.this, minutes);
 
 
-                // in case of allowing some delay, uncomment the following
+                // in case of allowing some delay (RECOMMENDED), uncomment the following
+
 //                // set data as extras when using Worker
 //                Data data = new Data.Builder()
 //                        .putInt("number", minutes*60)
@@ -71,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
 //                        .build();
 //                // use WorkManager by passing the WorkRequest
 //                WorkManager.getInstance(MainActivity.this).enqueue(oneTimeWorkRequest);
-//
-//                mRemainingMillis = minutes*1000*60;
-//                startTimer(mRemainingMillis);
+
+                mRemainingMillis = (long) minutes *1000*60;
+                startTimer(mRemainingMillis);
             }
         });
     }
